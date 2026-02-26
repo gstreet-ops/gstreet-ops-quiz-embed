@@ -10,6 +10,7 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showHint, setShowHint] = useState(false);
   const [answers, setAnswers] = useState([]);
   const [timeLeft, setTimeLeft] = useState(timerSeconds || 0);
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
@@ -18,6 +19,21 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
   const currentQuestion = questions[currentIndex];
   const isLastQuestion = currentIndex === questions.length - 1;
   const hasTimer = timerSeconds > 0;
+
+  // Extract hint: first sentence of explanation, or null if no explanation
+  const getHintText = (question) => {
+    if (!question?.explanation) return null;
+    const firstSentence = question.explanation.split(/(?<=[.!?])\s+/)[0];
+    // If the explanation is just one sentence, give a partial hint instead
+    if (firstSentence === question.explanation) {
+      const words = question.explanation.split(' ');
+      if (words.length > 6) {
+        return words.slice(0, Math.ceil(words.length * 0.5)).join(' ') + '...';
+      }
+      return firstSentence;
+    }
+    return firstSentence;
+  };
 
   // Shuffle answers for current question
   useEffect(() => {
@@ -59,11 +75,12 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
       correctAnswer: currentQuestion.correctAnswer,
       correct: false,
       timedOut: true,
+      usedHint: showHint,
     };
     setSelectedAnswer('__timed_out__');
     setShowFeedback(true);
     setAnswers(prev => [...prev, answer]);
-  }, [currentQuestion, showFeedback]);
+  }, [currentQuestion, showFeedback, showHint]);
 
   // Handle answer selection
   const handleSelect = (answer) => {
@@ -77,6 +94,7 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
       correctAnswer: currentQuestion.correctAnswer,
       correct: isCorrect,
       timedOut: false,
+      usedHint: showHint,
     };
 
     setSelectedAnswer(answer);
@@ -91,6 +109,7 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
     } else {
       setSelectedAnswer(null);
       setShowFeedback(false);
+      setShowHint(false);
       setCurrentIndex(prev => prev + 1);
     }
   };
@@ -205,6 +224,45 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
           </button>
         ))}
       </div>
+
+      {/* Hint button — only before answering, only if explanation exists */}
+      {!showFeedback && currentQuestion.explanation && (
+        <div style={{ marginBottom: '1rem', textAlign: 'center' }}>
+          {!showHint ? (
+            <button
+              onClick={() => setShowHint(true)}
+              style={{
+                padding: '0.5rem 1.25rem',
+                backgroundColor: 'transparent',
+                color: 'var(--embed-text)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '20px',
+                fontSize: '0.85rem',
+                fontFamily: 'var(--embed-font)',
+                cursor: 'pointer',
+                opacity: 0.7,
+                transition: 'opacity 0.2s ease',
+              }}
+              onMouseOver={(e) => { e.target.style.opacity = '1'; }}
+              onMouseOut={(e) => { e.target.style.opacity = '0.7'; }}
+            >
+              💡 Need a hint?
+            </button>
+          ) : (
+            <div style={{
+              padding: '0.75rem',
+              borderRadius: '8px',
+              backgroundColor: 'rgba(255,193,7,0.1)',
+              border: '1px solid rgba(255,193,7,0.2)',
+              fontSize: '0.85rem',
+              lineHeight: 1.5,
+              textAlign: 'left',
+            }}>
+              💡 {getHintText(currentQuestion)}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Timed out message */}
       {showFeedback && selectedAnswer === '__timed_out__' && (

@@ -165,6 +165,7 @@ function ResultScreen({ scoreData, answers, questions, community, guestName, use
                 }}>
                   <span style={{ fontSize: '0.875rem' }}>
                     {answer.correct ? '✅' : answer.timedOut ? '⏰' : '❌'}{' '}
+                    {answer.usedHint ? '💡 ' : ''}
                     <strong>Q{idx + 1}:</strong>{' '}
                     {question ? question.question.slice(0, 60) + (question.question.length > 60 ? '...' : '') : ''}
                   </span>
