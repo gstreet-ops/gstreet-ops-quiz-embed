@@ -148,5 +148,5 @@
 
 | Feature | Priority | Notes |
 |---------|----------|-------|
-| Hint system | High | Show a hint button per question (uses explanation or dedicated hint field). Critical for niche-content quizzes where even fans need a nudge. |
+| Hint system | ~~High~~ ✅ Done | Shows first sentence of explanation as hint before answering. Tracked in answer record (usedHint). |
 | Score-based result emoji | Low | Scale emoji to performance: 😅 0-30%, 👍 31-60%, 🎉 61-100% or similar |
