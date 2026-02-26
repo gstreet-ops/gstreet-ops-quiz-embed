@@ -140,7 +140,7 @@
 |-------|-------|
 | Safari third-party cookies | Auth persistence may fail in Safari — needs testing in Phase 2 |
 | Fixed iframe height | Without postMessage listener on host, mobile may show internal scroll |
-| Result emoji for 0% | 💪 (bicep) shows for 0/10 — should show a more appropriate icon for low scores |
+| ~~Result emoji for 0%~~ | ✅ Fixed — emoji now scales: 😅 0-29%, 💪 30-49%, 👍 50-79%, 🎉 80-100% |
 
 ---
 
@@ -149,4 +149,4 @@
 | Feature | Priority | Notes |
 |---------|----------|-------|
 | Hint system | ~~High~~ ✅ Done | Shows first sentence of explanation as hint before answering. Tracked in answer record (usedHint). |
-| Score-based result emoji | Low | Scale emoji to performance: 😅 0-30%, 👍 31-60%, 🎉 61-100% or similar |
+| Score-based result emoji | ~~Low~~ ✅ Done | Scale emoji to performance: 😅 0-29%, 💪 30-49%, 👍 50-79%, 🎉 80-100% |

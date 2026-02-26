@@ -9,7 +9,7 @@ function ResultScreen({ scoreData, answers, questions, community, guestName, use
   const [showReview, setShowReview] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState(null);
 
-  const emoji = scoreData.percentage >= 80 ? '🎉' : scoreData.percentage >= 50 ? '👍' : '💪';
+  const emoji = scoreData.percentage >= 80 ? '🎉' : scoreData.percentage >= 50 ? '👍' : scoreData.percentage >= 30 ? '💪' : '😅';
   const message = scoreData.percentage === 100
     ? 'Perfect score!'
     : scoreData.percentage >= 80
