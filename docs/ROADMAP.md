@@ -40,10 +40,10 @@
 - [x] Mobile responsive layout
 
 ### 1.5 Result Screen (1 hr)
-- [ ] Score summary with percentage and correct/total
-- [ ] Answer review (expandable)
-- [ ] Play Again button
-- [ ] Login prompt for anonymous users
+- [x] Score summary with percentage and correct/total
+- [x] Answer review (expandable)
+- [x] Play Again button
+- [x] Login prompt for anonymous users
 
 ### 1.6 Auth Modal (1.5 hrs)
 - [ ] Lightweight email/password login modal
