@@ -59,10 +59,10 @@
 - [x] Guest entries as "Guest-XXXX", highlight current player
 
 ### 1.8 Ellie Hallaron Integration (0.5 hr)
-- [ ] Confirm Ellie Hallaron community exists in trivia-app with questions loaded
-- [ ] Generate final embed URL with Dark Glamour theme params
-- [ ] Add `trivia.html` to `ellie-hallaron-website` with iframe + resize listener
-- [ ] Add nav link to author site
+- [x] Confirm Ellie Hallaron community exists in trivia-app with questions loaded
+- [x] Generate final embed URL with Dark Glamour theme params
+- [x] Add `trivia.html` to `ellie-hallaron-website` with iframe + resize listener
+- [x] Add nav link to author site
 - [ ] Test desktop and mobile
 
 ### 1.9 Documentation (0.5 hr)
