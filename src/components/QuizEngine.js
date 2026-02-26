@@ -20,19 +20,19 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
   const isLastQuestion = currentIndex === questions.length - 1;
   const hasTimer = timerSeconds > 0;
 
-  // Extract hint: first sentence of explanation, or null if no explanation
-  const getHintText = (question) => {
-    if (!question?.explanation) return null;
-    const firstSentence = question.explanation.split(/(?<=[.!?])\s+/)[0];
-    // If the explanation is just one sentence, give a partial hint instead
-    if (firstSentence === question.explanation) {
-      const words = question.explanation.split(' ');
-      if (words.length > 6) {
-        return words.slice(0, Math.ceil(words.length * 0.5)).join(' ') + '...';
-      }
-      return firstSentence;
+  // 50/50: eliminate two wrong answers, keep correct + one random wrong
+  const [eliminatedAnswers, setEliminatedAnswers] = useState([]);
+
+  const handleFiftyFifty = () => {
+    if (showHint || showFeedback) return;
+    const wrong = shuffledAnswers.filter(a => a !== currentQuestion.correctAnswer);
+    // Shuffle wrong answers and pick two to eliminate
+    for (let i = wrong.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [wrong[i], wrong[j]] = [wrong[j], wrong[i]];
     }
-    return firstSentence;
+    setEliminatedAnswers(wrong.slice(0, 2));
+    setShowHint(true);
   };
 
   // Shuffle answers for current question
@@ -110,6 +110,7 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
       setSelectedAnswer(null);
       setShowFeedback(false);
       setShowHint(false);
+      setEliminatedAnswers([]);
       setCurrentIndex(prev => prev + 1);
     }
   };
@@ -137,6 +138,10 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
     };
 
     if (!showFeedback) {
+      // 50/50 eliminated answers
+      if (eliminatedAnswers.includes(answer)) {
+        return { ...base, opacity: 0.15, borderColor: 'rgba(255,255,255,0.05)', cursor: 'default', textDecoration: 'line-through' };
+      }
       return { ...base, borderColor: 'rgba(255,255,255,0.1)' };
     }
 
@@ -210,8 +215,8 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
         {shuffledAnswers.map((answer, idx) => (
           <button
             key={idx}
-            onClick={() => handleSelect(answer)}
-            disabled={showFeedback}
+            onClick={() => !eliminatedAnswers.includes(answer) && handleSelect(answer)}
+            disabled={showFeedback || eliminatedAnswers.includes(answer)}
             style={getAnswerStyle(answer)}
             onMouseOver={(e) => {
               if (!showFeedback) e.target.style.borderColor = 'var(--embed-primary)';
@@ -225,42 +230,28 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
         ))}
       </div>
 
-      {/* Hint button — only before answering, only if explanation exists */}
-      {!showFeedback && currentQuestion.explanation && (
+      {/* 50/50 button — only before answering */}
+      {!showFeedback && !showHint && (
         <div style={{ marginBottom: '1rem', textAlign: 'center' }}>
-          {!showHint ? (
-            <button
-              onClick={() => setShowHint(true)}
-              style={{
-                padding: '0.5rem 1.25rem',
-                backgroundColor: 'transparent',
-                color: 'var(--embed-text)',
-                border: '1px solid rgba(255,255,255,0.2)',
-                borderRadius: '20px',
-                fontSize: '0.85rem',
-                fontFamily: 'var(--embed-font)',
-                cursor: 'pointer',
-                opacity: 0.7,
-                transition: 'opacity 0.2s ease',
-              }}
-              onMouseOver={(e) => { e.target.style.opacity = '1'; }}
-              onMouseOut={(e) => { e.target.style.opacity = '0.7'; }}
-            >
-              💡 Need a hint?
-            </button>
-          ) : (
-            <div style={{
-              padding: '0.75rem',
-              borderRadius: '8px',
-              backgroundColor: 'rgba(255,193,7,0.1)',
-              border: '1px solid rgba(255,193,7,0.2)',
+          <button
+            onClick={handleFiftyFifty}
+            style={{
+              padding: '0.5rem 1.25rem',
+              backgroundColor: 'transparent',
+              color: 'var(--embed-text)',
+              border: '1px solid rgba(255,255,255,0.2)',
+              borderRadius: '20px',
               fontSize: '0.85rem',
-              lineHeight: 1.5,
-              textAlign: 'left',
-            }}>
-              💡 {getHintText(currentQuestion)}
-            </div>
-          )}
+              fontFamily: 'var(--embed-font)',
+              cursor: 'pointer',
+              opacity: 0.7,
+              transition: 'opacity 0.2s ease',
+            }}
+            onMouseOver={(e) => { e.target.style.opacity = '1'; }}
+            onMouseOut={(e) => { e.target.style.opacity = '0.7'; }}
+          >
+            🎲 50/50
+          </button>
         </div>
       )}
 
