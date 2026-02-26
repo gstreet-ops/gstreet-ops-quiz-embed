@@ -2,7 +2,7 @@
   "name": "quiz-embed",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://gstreet-ops.github.io/quiz-embed",
+  "homepage": "https://gstreet-ops.github.io/gstreet-ops-quiz-embed",
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
     "react": "^18.3.1",
