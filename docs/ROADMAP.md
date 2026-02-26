@@ -92,8 +92,7 @@
 - [ ] Verify on client's live site
 
 ### 2.3 Cross-Origin Auth Polish (1 hr)
-- [ ] Test Safari (third-party cookie restrictions)
-- [ ] Verify localStorage auth persistence across origins
+- [ ] Test auth persistence in Safari, Firefox strict mode, Brave (deferred — no Safari access currently)
 - [x] Document browser-specific notes in CLIENT_SETUP.md
 
 ---
