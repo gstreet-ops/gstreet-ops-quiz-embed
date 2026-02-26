@@ -127,7 +127,7 @@
 |---------|-------|
 | Streak tracking | Daily play streak per community |
 | Scheduled quiz events | All visitors get same questions simultaneously at set time |
-| Social share card | Shareable image with score after game completion |
+| ~~Social share card~~ | ✅ Canvas-generated share image with themed colors, Web Share API + download fallback |
 | Webhook on game complete | POST to client URL for custom integrations |
 | White-label auth | Hide platform branding for fully private client deployments |
 

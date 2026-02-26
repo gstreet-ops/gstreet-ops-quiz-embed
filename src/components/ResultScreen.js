@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { generateShareCard, shareOrDownload } from '../utils/shareCard';
 
 /**
  * ResultScreen
  * 
  * Score summary, expandable answer review, play again, and login prompt.
  */
-function ResultScreen({ scoreData, answers, questions, community, guestName, user, onPlayAgain, onLoginClick, onLogout }) {
+function ResultScreen({ scoreData, answers, questions, community, guestName, user, onPlayAgain, onLoginClick, onLogout, theme }) {
   const [showReview, setShowReview] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState(null);
+  const [shareStatus, setShareStatus] = useState(null); // null | 'generating' | 'shared' | 'downloaded'
 
   const emoji = scoreData.percentage >= 80 ? '🎉' : scoreData.percentage >= 50 ? '👍' : scoreData.percentage >= 30 ? '💪' : '😅';
   const message = scoreData.percentage === 100
@@ -17,6 +19,35 @@ function ResultScreen({ scoreData, answers, questions, community, guestName, use
     : scoreData.percentage >= 50
     ? 'Not bad!'
     : 'Keep practicing!';
+
+  const handleShare = async () => {
+    setShareStatus('generating');
+    try {
+      const cardTheme = theme || {
+        bg: getComputedStyle(document.documentElement).getPropertyValue('--embed-bg').trim() || '#0D0D0D',
+        surface: getComputedStyle(document.documentElement).getPropertyValue('--embed-surface').trim() || '#1A1A2E',
+        primary: getComputedStyle(document.documentElement).getPropertyValue('--embed-primary').trim() || '#6B2D5E',
+        accent: getComputedStyle(document.documentElement).getPropertyValue('--embed-accent').trim() || '#8B0000',
+        text: getComputedStyle(document.documentElement).getPropertyValue('--embed-text').trim() || '#F5F0EB',
+      };
+      const blob = await generateShareCard({
+        score: scoreData.score,
+        total: scoreData.total,
+        percentage: scoreData.percentage,
+        emoji,
+        message,
+        communityName: community?.name || '',
+        playerName: user?.user_metadata?.username || guestName,
+        theme: cardTheme,
+      });
+      const result = await shareOrDownload(blob, community?.slug);
+      setShareStatus(result);
+      setTimeout(() => setShareStatus(null), 2500);
+    } catch (err) {
+      console.error('Share failed:', err);
+      setShareStatus(null);
+    }
+  };
 
   return (
     <div style={{ maxWidth: '600px', margin: '0 auto', padding: '1.5rem 0' }}>
@@ -57,6 +88,25 @@ function ResultScreen({ scoreData, answers, questions, community, guestName, use
           }}
         >
           Play Again
+        </button>
+        <button
+          onClick={handleShare}
+          disabled={shareStatus === 'generating'}
+          style={{
+            flex: 1,
+            padding: '0.875rem',
+            backgroundColor: 'var(--embed-surface)',
+            color: 'var(--embed-text)',
+            border: '2px solid var(--embed-primary)',
+            borderRadius: '8px',
+            fontSize: '1rem',
+            fontWeight: '600',
+            fontFamily: 'var(--embed-font)',
+            cursor: shareStatus === 'generating' ? 'wait' : 'pointer',
+            opacity: shareStatus === 'generating' ? 0.7 : 1,
+          }}
+        >
+          {shareStatus === 'generating' ? '⏳' : shareStatus === 'shared' ? '✅ Shared!' : shareStatus === 'downloaded' ? '✅ Saved!' : '📤 Share'}
         </button>
         <button
           onClick={() => setShowReview(!showReview)}
