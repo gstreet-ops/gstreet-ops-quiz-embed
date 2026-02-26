@@ -16,13 +16,13 @@
 - [x] Add Supabase JS client
 - [x] Configure gh-pages deploy script
 - [ ] Enable GitHub Pages
-- [ ] Connect to shared Supabase project
+- [x] Connect to shared Supabase project
 
 ### 1.2 URL Param System (1 hr)
-- [ ] Build `utils/params.js` — parse, validate, and provide defaults for all embed params
-- [ ] Build `hooks/useEmbedTheme.js` — inject CSS custom properties from params
-- [ ] Dynamic Google Fonts loading from `font` param
-- [ ] Graceful fallback for missing or invalid params
+- [x] Build `utils/params.js` — parse, validate, and provide defaults for all embed params
+- [x] Build `hooks/useEmbedTheme.js` — inject CSS custom properties from params
+- [x] Dynamic Google Fonts loading from `font` param
+- [x] Graceful fallback for missing or invalid params
 
 ### 1.3 Supabase Integration (1.5 hrs)
 - [ ] Build `hooks/useQuestions.js` — fetch community questions by slug, category, difficulty
