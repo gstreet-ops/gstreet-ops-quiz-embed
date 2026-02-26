@@ -104,7 +104,7 @@
 - [ ] Versioned embeds — `/embed/v1` URL prefix, 12-month stability guarantee
 - [x] Embed analytics — `source` + `host_origin` columns on `games`, embed stats dashboard in Commissioner Embed tab
 - [ ] Custom domain — `quiz.yourdomain.com` CNAME, update all docs and generator
-- [ ] Category-scoped embeds — `?category=innocent-intentions` for book-specific quizzes
+- [x] Category-scoped embeds — `?category=innocent-intentions` for book-specific quizzes (verified: param parsing → query filter → configurator UI → URL generation)
 
 ---
 
