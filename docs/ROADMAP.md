@@ -15,7 +15,7 @@
 - [x] Initialize React app scaffold
 - [x] Add Supabase JS client
 - [x] Configure gh-pages deploy script
-- [ ] Enable GitHub Pages
+- [x] Enable GitHub Pages
 - [x] Connect to shared Supabase project
 
 ### 1.2 URL Param System (1 hr)
@@ -66,9 +66,9 @@
 - [ ] Test desktop and mobile
 
 ### 1.9 Documentation (0.5 hr)
-- [ ] `docs/EMBED_PARAMS.md` — full parameter reference
-- [ ] `docs/CLIENT_SETUP.md` — install on any HTML site
-- [ ] Update `README.md`
+- [x] `docs/EMBED_PARAMS.md` — full parameter reference
+- [x] `docs/CLIENT_SETUP.md` — install on any HTML site
+- [x] Update `README.md`
 
 ---
 
