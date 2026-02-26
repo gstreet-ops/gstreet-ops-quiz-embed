@@ -24,6 +24,9 @@ const DEFAULTS = {
   timer: 0,
   leaderboard: 'community',
   category: 'all',
+
+  // Version — stability contract for embed clients
+  v: 1,
 };
 
 const VALID_COUNTS = [5, 10, 15, 20];
@@ -103,11 +106,18 @@ export function parseEmbedParams(searchParams) {
   // Category
   const category = searchParams.get('category')?.trim() || DEFAULTS.category;
 
+  // Version — defaults to current (1). Future versions will branch behavior.
+  let v = parseInt(searchParams.get('v'), 10);
+  if (isNaN(v) || v < 1) {
+    v = DEFAULTS.v;
+  }
+
   return {
     params: {
       community,
       bg, surface, primary, accent, text, font,
       count, difficulty, timer, leaderboard, category,
+      v,
     },
     errors,
   };

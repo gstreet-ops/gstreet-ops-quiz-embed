@@ -37,6 +37,18 @@ https://gstreet-ops.github.io/gstreet-ops-quiz-embed/?community=YOUR_SLUG&bg=%23
 | `leaderboard` | string | `community` | community, platform, both | Leaderboard tabs to show |
 | `category` | string | `all` | any category slug | Filter by question category |
 
+## Version Parameter
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `v` | number | `1` | Embed version pin |
+
+The `v` parameter locks your embed to a specific version of the quiz behavior, layout, and param contract. When we release breaking changes (v2, v3, etc.), existing embeds pinned to `v=1` will continue working as-is.
+
+**Stability guarantee:** Each version is supported for at least 12 months after the next version ships. The Embed Code Generator in the Commissioner Dashboard automatically includes `v=1` in generated snippets.
+
+If `v` is omitted, the embed defaults to the current version (v1).
+
 ## Example — Ellie Hallaron (Dark Glamour)
 
 ```
