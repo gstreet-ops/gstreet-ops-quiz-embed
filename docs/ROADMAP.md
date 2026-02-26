@@ -102,7 +102,7 @@
 **Estimated effort:** 8–12 hours
 
 - [ ] Versioned embeds — `/embed/v1` URL prefix, 12-month stability guarantee
-- [ ] Embed analytics — play/completion events to Supabase, Commissioner Dashboard section
+- [x] Embed analytics — `source` + `host_origin` columns on `games`, embed stats dashboard in Commissioner Embed tab
 - [ ] Custom domain — `quiz.yourdomain.com` CNAME, update all docs and generator
 - [ ] Category-scoped embeds — `?category=innocent-intentions` for book-specific quizzes
 

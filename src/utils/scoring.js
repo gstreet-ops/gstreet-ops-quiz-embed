@@ -34,12 +34,24 @@ export async function saveGame(supabase, {
   answers = [],
 }) {
   try {
+    // Detect host origin for embed analytics
+    let hostOrigin = null;
+    try {
+      if (window.self !== window.top && document.referrer) {
+        hostOrigin = new URL(document.referrer).hostname;
+      }
+    } catch (e) {
+      // Cross-origin referrer access blocked — that's fine
+    }
+
     const gameRecord = {
       community_id: communityId,
       score: Math.min(score, totalQuestions),
       total_questions: totalQuestions,
       category,
       difficulty,
+      source: 'embed',
+      host_origin: hostOrigin,
     };
 
     // Attach user or session identifier
