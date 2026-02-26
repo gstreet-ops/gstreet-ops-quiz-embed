@@ -46,10 +46,10 @@
 - [x] Login prompt for anonymous users
 
 ### 1.6 Auth Modal (1.5 hrs)
-- [ ] Lightweight email/password login modal
-- [ ] Registration flow (shared Supabase Auth)
-- [ ] Anonymous score claim on login (match session_id to profile)
-- [ ] Persist auth state in localStorage
+- [x] Lightweight email/password login modal
+- [x] Registration flow (shared Supabase Auth)
+- [x] Anonymous score claim on login (match session_id to profile)
+- [x] Persist auth state in localStorage
 
 ### 1.7 Leaderboard (2 hrs)
 - [ ] Community leaderboard tab — top 10 by average score

@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useQuestions } from '../hooks/useQuestions';
+import { useAuth } from '../hooks/useAuth';
 import { getSessionId, getGuestName } from '../utils/storage';
 import { calculateScore, saveGame } from '../utils/scoring';
 import { supabase } from '../supabaseClient';
 import QuizEngine from './QuizEngine';
 import ResultScreen from './ResultScreen';
+import AuthModal from './AuthModal';
 
 /**
  * EmbedShell
@@ -17,9 +19,11 @@ import ResultScreen from './ResultScreen';
  */
 function EmbedShell({ params }) {
   const { community, questions, loading, error, refetch } = useQuestions(params);
+  const { user, login, register, logout, claimAnonymousScores } = useAuth();
   const [screen, setScreen] = useState('loading'); // loading | quiz | results
   const [answers, setAnswers] = useState([]);
   const [scoreData, setScoreData] = useState(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const containerRef = useRef(null);
   const sessionId = useRef(getSessionId());
   const guestName = useRef(getGuestName());
@@ -57,6 +61,7 @@ function EmbedShell({ params }) {
 
     // Save game to Supabase
     await saveGame(supabase, {
+      userId: user?.id || null,
       sessionId: sessionId.current,
       communityId: community?.id,
       score: score.score,
@@ -133,7 +138,20 @@ function EmbedShell({ params }) {
           questions={questions}
           community={community}
           guestName={guestName.current}
+          user={user}
           onPlayAgain={handlePlayAgain}
+          onLoginClick={() => setShowAuthModal(true)}
+          onLogout={logout}
+        />
+      )}
+
+      {/* Auth modal */}
+      {showAuthModal && (
+        <AuthModal
+          onClose={() => setShowAuthModal(false)}
+          onLogin={login}
+          onRegister={register}
+          onSuccess={() => claimAnonymousScores(sessionId.current)}
         />
       )}
     </div>

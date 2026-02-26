@@ -5,7 +5,7 @@ import React, { useState } from 'react';
  * 
  * Score summary, expandable answer review, play again, and login prompt.
  */
-function ResultScreen({ scoreData, answers, questions, community, guestName, onPlayAgain }) {
+function ResultScreen({ scoreData, answers, questions, community, guestName, user, onPlayAgain, onLoginClick, onLogout }) {
   const [showReview, setShowReview] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState(null);
 
@@ -77,7 +77,7 @@ function ResultScreen({ scoreData, answers, questions, community, guestName, onP
         </button>
       </div>
 
-      {/* Login prompt for anonymous users */}
+      {/* Auth section */}
       <div style={{
         padding: '1rem',
         borderRadius: '8px',
@@ -86,12 +86,53 @@ function ResultScreen({ scoreData, answers, questions, community, guestName, onP
         marginBottom: '1.5rem',
         border: '1px solid rgba(255,255,255,0.05)',
       }}>
-        <p style={{ margin: '0 0 0.5rem', fontSize: '0.9rem' }}>
-          🔒 Sign in to save your scores and appear on the leaderboard
-        </p>
-        <p style={{ margin: 0, fontSize: '0.75rem', opacity: 0.5 }}>
-          Playing as {guestName}
-        </p>
+        {user ? (
+          <>
+            <p style={{ margin: '0 0 0.5rem', fontSize: '0.9rem' }}>
+              ✅ Signed in as <strong>{user.user_metadata?.username || user.email}</strong>
+            </p>
+            <button
+              onClick={onLogout}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'var(--embed-text)',
+                opacity: 0.5,
+                fontSize: '0.75rem',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+              }}
+            >
+              Sign out
+            </button>
+          </>
+        ) : (
+          <>
+            <p style={{ margin: '0 0 0.5rem', fontSize: '0.9rem' }}>
+              🔒 Sign in to save your scores and appear on the leaderboard
+            </p>
+            <button
+              onClick={onLoginClick}
+              style={{
+                padding: '0.5rem 1.5rem',
+                backgroundColor: 'var(--embed-primary)',
+                color: 'var(--embed-text)',
+                border: 'none',
+                borderRadius: '6px',
+                fontSize: '0.85rem',
+                fontWeight: '600',
+                fontFamily: 'var(--embed-font)',
+                cursor: 'pointer',
+                marginTop: '0.5rem',
+              }}
+            >
+              Sign In / Register
+            </button>
+            <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', opacity: 0.5 }}>
+              Playing as {guestName}
+            </p>
+          </>
+        )}
       </div>
 
       {/* Answer review (expandable) */}
