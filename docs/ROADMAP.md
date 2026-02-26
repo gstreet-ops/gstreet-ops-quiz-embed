@@ -94,7 +94,7 @@
 ### 2.3 Cross-Origin Auth Polish (1 hr)
 - [ ] Test Safari (third-party cookie restrictions)
 - [ ] Verify localStorage auth persistence across origins
-- [ ] Document browser-specific notes in CLIENT_SETUP.md
+- [x] Document browser-specific notes in CLIENT_SETUP.md
 
 ---
 
