@@ -25,9 +25,9 @@
 - [x] Graceful fallback for missing or invalid params
 
 ### 1.3 Supabase Integration (1.5 hrs)
-- [ ] Build `hooks/useQuestions.js` — fetch community questions by slug, category, difficulty
-- [ ] Validate community slug on load — friendly error if not found
-- [ ] Anonymous session ID generation and localStorage persistence
+- [x] Build `hooks/useQuestions.js` — fetch community questions by slug, category, difficulty
+- [x] Validate community slug on load — friendly error if not found
+- [x] Anonymous session ID generation and localStorage persistence
 - [ ] Confirm RLS policies allow anon reads on `community_questions`
 - [ ] Add anon INSERT policy on `games` and `game_answers`
 
