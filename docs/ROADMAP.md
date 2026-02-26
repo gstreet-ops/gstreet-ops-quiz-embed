@@ -77,13 +77,13 @@
 **Estimated effort:** 4–6 hours
 
 ### 2.1 Embed Code Generator in trivia-app (3 hrs)
-- [ ] Visual theme configurator tab in Commissioner Dashboard
-- [ ] Color pickers for bg, primary, accent, text
-- [ ] Font selector (tested Google Fonts dropdown)
-- [ ] Behavior controls (count, difficulty, timer, leaderboard scope)
-- [ ] Live preview panel
-- [ ] Copy-to-clipboard iframe snippet
-- [ ] Save theme config to `communities.settings.embed_theme` JSONB
+- [x] Visual theme configurator tab in Commissioner Dashboard
+- [x] Color pickers for bg, primary, accent, text
+- [x] Font selector (tested Google Fonts dropdown)
+- [x] Behavior controls (count, difficulty, timer, leaderboard scope)
+- [x] Live preview panel
+- [x] Copy-to-clipboard iframe snippet
+- [x] Save theme config to `communities.settings.embed_theme` JSONB
 
 ### 2.2 Second Client Onboarding (1–2 hrs)
 - [ ] Create community in trivia-app
