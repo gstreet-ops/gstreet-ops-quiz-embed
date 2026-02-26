@@ -7,6 +7,7 @@ import { supabase } from '../supabaseClient';
 import QuizEngine from './QuizEngine';
 import ResultScreen from './ResultScreen';
 import AuthModal from './AuthModal';
+import Leaderboard from './Leaderboard';
 
 /**
  * EmbedShell
@@ -132,17 +133,27 @@ function EmbedShell({ params }) {
 
       {/* Results screen */}
       {screen === 'results' && scoreData && (
-        <ResultScreen
-          scoreData={scoreData}
-          answers={answers}
-          questions={questions}
-          community={community}
-          guestName={guestName.current}
-          user={user}
-          onPlayAgain={handlePlayAgain}
-          onLoginClick={() => setShowAuthModal(true)}
-          onLogout={logout}
-        />
+        <>
+          <ResultScreen
+            scoreData={scoreData}
+            answers={answers}
+            questions={questions}
+            community={community}
+            guestName={guestName.current}
+            user={user}
+            onPlayAgain={handlePlayAgain}
+            onLoginClick={() => setShowAuthModal(true)}
+            onLogout={logout}
+          />
+          {params.leaderboard !== 'none' && (
+            <Leaderboard
+              community={community}
+              leaderboardParam={params.leaderboard}
+              user={user}
+              guestName={guestName.current}
+            />
+          )}
+        </>
       )}
 
       {/* Auth modal */}

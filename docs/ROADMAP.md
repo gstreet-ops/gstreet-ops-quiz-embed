@@ -52,11 +52,11 @@
 - [x] Persist auth state in localStorage
 
 ### 1.7 Leaderboard (2 hrs)
-- [ ] Community leaderboard tab — top 10 by average score
-- [ ] Platform leaderboard tab — top 10 across all communities
-- [ ] Tab visibility controlled by `leaderboard` URL param
-- [ ] Refresh after each completed game
-- [ ] Guest entries as "Guest-XXXX", highlight current player
+- [x] Community leaderboard tab — top 10 by average score
+- [x] Platform leaderboard tab — top 10 across all communities
+- [x] Tab visibility controlled by `leaderboard` URL param
+- [x] Refresh after each completed game
+- [x] Guest entries as "Guest-XXXX", highlight current player
 
 ### 1.8 Ellie Hallaron Integration (0.5 hr)
 - [ ] Confirm Ellie Hallaron community exists in trivia-app with questions loaded
