@@ -46,3 +46,11 @@ CREATE POLICY "Anon can insert game answers"
 -- Allow anonymous reads on community_leaderboards view
 GRANT SELECT ON community_leaderboards TO anon;
 ```
+
+---
+
+## Migrations
+
+| Migration | Date | Doc |
+|-----------|------|-----|
+| Add `status` column to `community_questions` | 2026-02-26 | [MIGRATION_STATUS_COLUMN.md](MIGRATION_STATUS_COLUMN.md) |

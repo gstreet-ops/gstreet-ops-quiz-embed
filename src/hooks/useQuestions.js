@@ -43,11 +43,12 @@ export function useQuestions(params) {
 
       setCommunity(communityData);
 
-      // 2. Build question query
+      // 2. Build question query (only active questions)
       let query = supabase
         .from('community_questions')
         .select('*')
-        .eq('community_id', communityData.id);
+        .eq('community_id', communityData.id)
+        .eq('status', 'active');
 
       if (params.difficulty !== 'mixed') {
         query = query.eq('difficulty', params.difficulty);
