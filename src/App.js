@@ -1,6 +1,7 @@
 import React from 'react';
 import { parseEmbedParams } from './utils/params';
 import { useEmbedTheme } from './hooks/useEmbedTheme';
+import EmbedShell from './components/EmbedShell';
 
 function App() {
   const searchParams = new URLSearchParams(window.location.search);
@@ -34,23 +35,7 @@ function App() {
     );
   }
 
-  // Placeholder — EmbedShell will replace this in 1.4
-  return (
-    <div style={{
-      backgroundColor: 'var(--embed-bg)',
-      color: 'var(--embed-text)',
-      fontFamily: 'var(--embed-font)',
-      minHeight: '100vh',
-      padding: '2rem',
-    }}>
-      <h1>Quiz Embed</h1>
-      <p>Community: <strong>{params.community}</strong></p>
-      <p>Theme loaded ✓</p>
-      <pre style={{ fontSize: '0.75rem', opacity: 0.6 }}>
-        {JSON.stringify(params, null, 2)}
-      </pre>
-    </div>
-  );
+  return <EmbedShell params={params} />;
 }
 
 export default App;

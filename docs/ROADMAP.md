@@ -32,12 +32,12 @@
 - [x] Add anon INSERT policy on `games` and `game_answers`
 
 ### 1.4 Core Quiz Engine (2.5 hrs)
-- [ ] `EmbedShell.js` — outer container, theme injection, postMessage resize
-- [ ] `QuizEngine.js` — question display, answer grid, selection, immediate feedback
-- [ ] Score tracking (correct count, percentage)
-- [ ] Question progression and end detection
-- [ ] Optional countdown timer (reads `timer` param, 0 = disabled)
-- [ ] Mobile responsive layout
+- [x] `EmbedShell.js` — outer container, theme injection, postMessage resize
+- [x] `QuizEngine.js` — question display, answer grid, selection, immediate feedback
+- [x] Score tracking (correct count, percentage)
+- [x] Question progression and end detection
+- [x] Optional countdown timer (reads `timer` param, 0 = disabled)
+- [x] Mobile responsive layout
 
 ### 1.5 Result Screen (1 hr)
 - [ ] Score summary with percentage and correct/total
