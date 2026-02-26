@@ -28,8 +28,8 @@
 - [x] Build `hooks/useQuestions.js` — fetch community questions by slug, category, difficulty
 - [x] Validate community slug on load — friendly error if not found
 - [x] Anonymous session ID generation and localStorage persistence
-- [ ] Confirm RLS policies allow anon reads on `community_questions`
-- [ ] Add anon INSERT policy on `games` and `game_answers`
+- [x] Confirm RLS policies allow anon reads on `community_questions`
+- [x] Add anon INSERT policy on `games` and `game_answers`
 
 ### 1.4 Core Quiz Engine (2.5 hrs)
 - [ ] `EmbedShell.js` — outer container, theme injection, postMessage resize
