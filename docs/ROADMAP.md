@@ -140,3 +140,13 @@
 |-------|-------|
 | Safari third-party cookies | Auth persistence may fail in Safari — needs testing in Phase 2 |
 | Fixed iframe height | Without postMessage listener on host, mobile may show internal scroll |
+| Result emoji for 0% | 💪 (bicep) shows for 0/10 — should show a more appropriate icon for low scores |
+
+---
+
+## Next Up
+
+| Feature | Priority | Notes |
+|---------|----------|-------|
+| Hint system | High | Show a hint button per question (uses explanation or dedicated hint field). Critical for niche-content quizzes where even fans need a nudge. |
+| Score-based result emoji | Low | Scale emoji to performance: 😅 0-30%, 👍 31-60%, 🎉 61-100% or similar |
