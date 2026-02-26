@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/quiz-embed/static/js/main.66c3063c.js",
-    "index.html": "/quiz-embed/index.html",
-    "main.66c3063c.js.map": "/quiz-embed/static/js/main.66c3063c.js.map"
+    "main.js": "/gstreet-ops-quiz-embed/static/js/main.66c3063c.js",
+    "index.html": "/gstreet-ops-quiz-embed/index.html",
+    "main.66c3063c.js.map": "/gstreet-ops-quiz-embed/static/js/main.66c3063c.js.map"
   },
   "entrypoints": [
     "static/js/main.66c3063c.js"
