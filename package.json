@@ -1,7 +1,12 @@
 {
-  "name": "quiz-embed",
+  "name": "@gstreet-ops/quiz-embed",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "main": "dist/quiz-embed.js",
+  "module": "dist/quiz-embed.esm.js",
+  "files": [
+    "dist"
+  ],
   "homepage": "https://gstreet-ops.github.io/gstreet-ops-quiz-embed",
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
@@ -10,7 +15,10 @@
     "react-scripts": "5.0.1"
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0"
+    "@vitejs/plugin-react": "^4.7.0",
+    "gh-pages": "^6.3.0",
+    "terser": "^5.46.0",
+    "vite": "^6.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -18,7 +26,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "npx gh-pages -d build"
+    "deploy": "npx gh-pages -d build",
+    "build:wc": "vite build --config vite.config.wc.js",
+    "build:wc:watch": "vite build --config vite.config.wc.js --watch"
   },
   "browserslist": {
     "production": [
