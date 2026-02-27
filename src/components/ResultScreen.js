@@ -6,7 +6,7 @@ import { generateShareCard, shareOrDownload } from '../utils/shareCard';
  * 
  * Score summary, expandable answer review, play again, and login prompt.
  */
-function ResultScreen({ scoreData, answers, questions, community, guestName, user, onPlayAgain, onLoginClick, onLogout, theme }) {
+function ResultScreen({ scoreData, answers, questions, community, guestName, user, onPlayAgain, onLoginClick, onLogout, theme, streakData }) {
   const [showReview, setShowReview] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState(null);
   const [shareStatus, setShareStatus] = useState(null); // null | 'generating' | 'shared' | 'downloaded'
@@ -39,6 +39,7 @@ function ResultScreen({ scoreData, answers, questions, community, guestName, use
         communityName: community?.name || '',
         playerName: user?.user_metadata?.username || guestName,
         theme: cardTheme,
+        streak: streakData?.count > 1 ? streakData.count : null,
       });
       const result = await shareOrDownload(blob, community?.slug);
       setShareStatus(result);
@@ -66,6 +67,16 @@ function ResultScreen({ scoreData, answers, questions, community, guestName, use
         {community && (
           <p style={{ opacity: 0.4, fontSize: '0.75rem', marginTop: '0.5rem' }}>
             {community.name}
+          </p>
+        )}
+        {streakData && streakData.count > 1 && (
+          <p style={{
+            marginTop: '0.75rem',
+            fontSize: '0.9rem',
+            fontWeight: '600',
+            color: 'var(--embed-accent)',
+          }}>
+            🔥 {streakData.count} day streak{streakData.isNew ? ' — keep it going!' : ''}
           </p>
         )}
       </div>

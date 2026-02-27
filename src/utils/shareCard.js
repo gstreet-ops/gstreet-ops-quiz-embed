@@ -21,7 +21,7 @@
  */
 export async function generateShareCard({
   score, total, percentage, emoji, message,
-  communityName, playerName, theme,
+  communityName, playerName, theme, streak = null,
 }) {
   const width = 600;
   const height = 340;
@@ -97,6 +97,15 @@ export async function generateShareCard({
     ctx.fillStyle = textColor;
     ctx.globalAlpha = 0.35;
     ctx.fillText(communityName, centerX, cardY + 248);
+    ctx.globalAlpha = 1;
+  }
+
+  // Streak badge
+  if (streak && streak > 1) {
+    ctx.font = 'bold 14px system-ui, -apple-system, sans-serif';
+    ctx.fillStyle = theme.accent || '#8B0000';
+    ctx.globalAlpha = 0.9;
+    ctx.fillText(`🔥 ${streak} day streak`, centerX, cardY + 272);
     ctx.globalAlpha = 1;
   }
 

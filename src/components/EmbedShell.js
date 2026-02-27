@@ -3,6 +3,7 @@ import { useQuestions } from '../hooks/useQuestions';
 import { useAuth } from '../hooks/useAuth';
 import { getSessionId, getGuestName } from '../utils/storage';
 import { calculateScore, saveGame } from '../utils/scoring';
+import { recordGameForStreak, getStreak } from '../utils/streaks';
 import { supabase } from '../supabaseClient';
 import QuizEngine from './QuizEngine';
 import ResultScreen from './ResultScreen';
@@ -25,6 +26,7 @@ function EmbedShell({ params }) {
   const [answers, setAnswers] = useState([]);
   const [scoreData, setScoreData] = useState(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [streakData, setStreakData] = useState(null);
   const containerRef = useRef(null);
   const sessionId = useRef(getSessionId());
   const guestName = useRef(getGuestName());
@@ -76,6 +78,12 @@ function EmbedShell({ params }) {
         correct: a.correct,
       })),
     });
+
+    // Record streak
+    if (community?.id) {
+      const streak = recordGameForStreak(community.id);
+      setStreakData(streak);
+    }
 
     setScreen('results');
   };
@@ -144,6 +152,7 @@ function EmbedShell({ params }) {
             onPlayAgain={handlePlayAgain}
             onLoginClick={() => setShowAuthModal(true)}
             onLogout={logout}
+            streakData={streakData}
           />
           {params.leaderboard !== 'none' && (
             <Leaderboard
