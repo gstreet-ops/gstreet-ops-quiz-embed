@@ -1,7 +1,14 @@
-# CLAUDE.md — [Project Name]
+# CLAUDE.md — Quiz Embed Platform
 
 This file is read automatically by Claude Code at the start of every session.
 Follow these rules for all work in this project.
+
+## Cross-Project Context
+Before starting work, read the workspace Project Registry for relationship context:
+`C:\Users\brian\projects\PROJECT_REGISTRY.md`
+This project is part of the **Trivia Platform** group (Supabase Account 1).
+It depends on trivia-app's Supabase schema — it reads but does not own the data.
+It publishes @gstreet-ops/quiz-embed to npm, consumed by client sites via CDN.
 
 ---
 
