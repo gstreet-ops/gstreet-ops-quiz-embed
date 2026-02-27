@@ -115,9 +115,11 @@
 - [x] `<quiz-embed>` custom element (React 18 inside HTMLElement with Shadow DOM)
 - [x] Shadow DOM for style isolation (`mode: 'open'`, scoped Google Fonts)
 - [x] Custom events: `quiz:started`, `quiz:completed`, `quiz:answer` (bubbles + composed)
-- [x] npm package configured as `@gstreet-ops/quiz-embed` (IIFE + ESM builds via Vite)
-- [x] CDN distribution via jsDelivr (`dist/quiz-embed.js`)
+- [x] npm package published as `@gstreet-ops/quiz-embed@0.1.0` (IIFE + ESM builds via Vite)
+- [x] CDN distribution live via jsDelivr (`dist/quiz-embed.js`) — verified serving
 - [x] Maintain iframe path for non-developer clients (CRA build unchanged)
+- [x] Ellie Hallaron site upgraded from iframe to web component (iframe as noscript fallback)
+- [x] npm org (@gstreet-ops) and account (gstreetops) created
 
 ---
 
