@@ -128,7 +128,7 @@
 | ~~Streak tracking~~ | ✅ Daily play streaks per community via localStorage, displayed on result screen + share card |
 | Scheduled quiz events | All visitors get same questions simultaneously at set time |
 | ~~Social share card~~ | ✅ Canvas-generated share image with themed colors, Web Share API + download fallback |
-| Webhook on game complete | POST to client URL for custom integrations |
+| ~~Webhook on game complete~~ | ✅ Fire-and-forget POST to commissioner-configured URL with score data. Configured in Embed tab. |
 | White-label auth | Hide platform branding for fully private client deployments |
 
 ---

@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 import { getSessionId, getGuestName } from '../utils/storage';
 import { calculateScore, saveGame } from '../utils/scoring';
 import { recordGameForStreak, getStreak } from '../utils/streaks';
+import { fireWebhook } from '../utils/webhook';
 import { supabase } from '../supabaseClient';
 import QuizEngine from './QuizEngine';
 import ResultScreen from './ResultScreen';
@@ -83,6 +84,22 @@ function EmbedShell({ params }) {
     if (community?.id) {
       const streak = recordGameForStreak(community.id);
       setStreakData(streak);
+
+      // Fire webhook if configured (non-blocking)
+      const webhookUrl = community?.settings?.webhook_url;
+      if (webhookUrl) {
+        fireWebhook({
+          webhookUrl,
+          communitySlug: community.slug,
+          communityName: community.name,
+          score: score.score,
+          total: score.total,
+          percentage: score.percentage,
+          playerName: user?.user_metadata?.username || guestName.current,
+          isAnonymous: !user,
+          streak: streak.count,
+        });
+      }
     }
 
     setScreen('results');
