@@ -6,4 +6,3 @@ if (!customElements.get('quiz-embed')) {
 }
 
 export { QuizEmbedElement };
-export default QuizEmbedElement;
