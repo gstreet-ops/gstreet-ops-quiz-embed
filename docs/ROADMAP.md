@@ -58,7 +58,7 @@
 - [x] Refresh after each completed game
 - [x] Guest entries as "Guest-XXXX", highlight current player
 
-### 1.8 Ellie Hallaron Integration (0.5 hr)
+### 1.8 Ellie Hallaron Integration (0.5 hr) ✅
 - [x] Confirm Ellie Hallaron community exists in trivia-app with questions loaded
 - [x] Generate final embed URL with Dark Glamour theme params
 - [x] Add `trivia.html` to `ellie-hallaron-website` with iframe + resize listener
