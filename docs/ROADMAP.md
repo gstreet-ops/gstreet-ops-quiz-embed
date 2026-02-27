@@ -112,12 +112,12 @@
 **Goal:** Native web component for developer clients.  
 **Estimated effort:** 15–20 hours
 
-- [ ] `<quiz-embed>` custom element (vanilla JS or Lit)
-- [ ] Shadow DOM for style isolation
-- [ ] Custom events: `quiz:started`, `quiz:completed`, `quiz:score`
-- [ ] npm publish as `@gstreet-ops/quiz-embed`
-- [ ] CDN distribution via jsDelivr
-- [ ] Maintain iframe path for non-developer clients
+- [x] `<quiz-embed>` custom element (React 18 inside HTMLElement with Shadow DOM)
+- [x] Shadow DOM for style isolation (`mode: 'open'`, scoped Google Fonts)
+- [x] Custom events: `quiz:started`, `quiz:completed`, `quiz:answer` (bubbles + composed)
+- [x] npm package configured as `@gstreet-ops/quiz-embed` (IIFE + ESM builds via Vite)
+- [x] CDN distribution via jsDelivr (`dist/quiz-embed.js`)
+- [x] Maintain iframe path for non-developer clients (CRA build unchanged)
 
 ---
 

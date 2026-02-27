@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz Embed — iframe vs Web Component</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      padding: 2rem;
+    }
+    h1 { text-align: center; margin-bottom: 0.5rem; }
+    .subtitle { text-align: center; opacity: 0.6; margin-bottom: 2rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    .panel {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .panel h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+    .panel .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+    .tag-iframe { background: #e3f2fd; color: #1565c0; }
+    .tag-wc { background: #e8f5e9; color: #2e7d32; }
+    iframe, quiz-embed {
+      width: 100%;
+      min-height: 500px;
+      border: none;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>iframe vs Web Component</h1>
+  <p class="subtitle">Same quiz, two integration methods — side by side</p>
+
+  <div class="grid">
+
+    <!-- iframe panel -->
+    <div class="panel">
+      <h2>iframe Embed</h2>
+      <span class="tag tag-iframe">iframe</span>
+      <iframe
+        id="quiz-iframe"
+        src="https://gstreet-ops.github.io/gstreet-ops-quiz-embed/?community=ellie-hallaron&bg=%230D0D0D&surface=%231A1A2E&primary=%236B2D5E&accent=%238B0000&text=%23F5F0EB&font=Cormorant+Garamond&count=5&difficulty=mixed&leaderboard=both"
+        scrolling="no"
+        allowtransparency="true"
+        title="Quiz Embed (iframe)">
+      </iframe>
+    </div>
+
+    <!-- Web component panel -->
+    <div class="panel">
+      <h2>Web Component</h2>
+      <span class="tag tag-wc">&lt;quiz-embed&gt;</span>
+      <quiz-embed
+        community="ellie-hallaron"
+        bg="#0D0D0D"
+        surface="#1A1A2E"
+        primary="#6B2D5E"
+        accent="#8B0000"
+        text="#F5F0EB"
+        font="Cormorant Garamond"
+        count="5"
+        difficulty="mixed"
+        leaderboard="both"
+      ></quiz-embed>
+    </div>
+
+  </div>
+
+  <!-- iframe auto-resize -->
+  <script>
+    window.addEventListener('message', (e) => {
+      if (e.data && e.data.type === 'quiz-embed-resize') {
+        const iframe = document.getElementById('quiz-iframe');
+        if (iframe) iframe.style.height = (e.data.height + 16) + 'px';
+      }
+    });
+  </script>
+
+  <!--
+    Load the web component bundle.
+    For local dev:  <script src="../dist/quiz-embed.js"></script>
+    For production: use the CDN URL below
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/@gstreet-ops/quiz-embed@latest/dist/quiz-embed.js"></script>
+
+</body>
+</html>

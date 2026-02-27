@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz Embed — Web Component Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      padding: 2rem;
+    }
+    h1 { margin-bottom: 0.5rem; }
+    .subtitle { opacity: 0.6; margin-bottom: 2rem; }
+    .demo-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    quiz-embed {
+      width: 100%;
+      min-height: 500px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    }
+    .event-log {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #1a1a2e;
+      color: #a0f0a0;
+      border-radius: 8px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 0.8rem;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .event-log h3 {
+      color: #f5f0eb;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .event-log .entry {
+      margin-bottom: 0.25rem;
+      padding: 0.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .event-log .entry .name { color: #7ec8e3; }
+    .event-log .entry .time { color: #888; font-size: 0.75rem; }
+    .event-log .empty { color: #666; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <div class="demo-container">
+    <h1>Web Component Demo</h1>
+    <p class="subtitle">&lt;quiz-embed&gt; custom element with Shadow DOM and event listeners</p>
+
+    <!-- The web component -->
+    <quiz-embed
+      community="ellie-hallaron"
+      bg="#0D0D0D"
+      surface="#1A1A2E"
+      primary="#6B2D5E"
+      accent="#8B0000"
+      text="#F5F0EB"
+      font="Cormorant Garamond"
+      count="5"
+      difficulty="mixed"
+      leaderboard="both"
+    ></quiz-embed>
+
+    <!-- Event log -->
+    <div class="event-log">
+      <h3>Event Log</h3>
+      <div id="log"><p class="empty">Waiting for events...</p></div>
+    </div>
+  </div>
+
+  <!--
+    Load the web component bundle.
+    For local dev:  <script src="../dist/quiz-embed.js"></script>
+    For production: use the CDN URL below
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/@gstreet-ops/quiz-embed@latest/dist/quiz-embed.js"></script>
+
+  <script>
+    const log = document.getElementById('log');
+    const quiz = document.querySelector('quiz-embed');
+    let first = true;
+
+    function addEntry(name, detail) {
+      if (first) { log.innerHTML = ''; first = false; }
+      const time = new Date().toLocaleTimeString();
+      const entry = document.createElement('div');
+      entry.className = 'entry';
+      entry.innerHTML = `<span class="time">${time}</span> <span class="name">${name}</span> ${JSON.stringify(detail)}`;
+      log.prepend(entry);
+    }
+
+    quiz.addEventListener('quiz:started', (e) => addEntry('quiz:started', e.detail));
+    quiz.addEventListener('quiz:answer', (e) => addEntry('quiz:answer', e.detail));
+    quiz.addEventListener('quiz:completed', (e) => addEntry('quiz:completed', e.detail));
+  </script>
+
+</body>
+</html>
