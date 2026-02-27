@@ -20,7 +20,7 @@ import Leaderboard from './Leaderboard';
  * - Theme wrapper via CSS custom properties
  * - Score saving on quiz completion
  */
-function EmbedShell({ params }) {
+function EmbedShell({ params, onQuizStarted, onQuizCompleted, onAnswered }) {
   const { community, questions, loading, error, refetch } = useQuestions(params);
   const { user, login, register, logout, claimAnonymousScores } = useAuth();
   const [screen, setScreen] = useState('loading'); // loading | quiz | results
@@ -102,6 +102,15 @@ function EmbedShell({ params }) {
       }
     }
 
+    // Fire completion callback (used by web component to dispatch quiz:completed event)
+    onQuizCompleted?.({
+      score: score.score,
+      total: score.total,
+      percentage: score.percentage,
+      streak: streakData?.count,
+      communitySlug: community?.slug,
+    });
+
     setScreen('results');
   };
 
@@ -152,7 +161,10 @@ function EmbedShell({ params }) {
           questions={questions}
           community={community}
           timer={params.timer}
+          difficulty={params.difficulty}
           onComplete={handleQuizComplete}
+          onQuizStarted={onQuizStarted}
+          onAnswered={onAnswered}
         />
       )}
 

@@ -4,6 +4,7 @@ import EmbedShell from '../components/EmbedShell';
 import { parseEmbedParams } from '../utils/params';
 import { applyTheme, loadFont } from './theme';
 import SHADOW_CSS from './shadow-styles';
+import { createQuizStartedEvent, createQuizCompletedEvent, createQuizAnswerEvent } from './events';
 
 /**
  * <quiz-embed> Custom Element
@@ -110,7 +111,12 @@ class QuizEmbedElement extends HTMLElement {
     }
 
     this._root.render(
-      React.createElement(EmbedShell, { params })
+      React.createElement(EmbedShell, {
+        params,
+        onQuizStarted: (detail) => this.dispatchEvent(createQuizStartedEvent(detail)),
+        onQuizCompleted: (detail) => this.dispatchEvent(createQuizCompletedEvent(detail)),
+        onAnswered: (detail) => this.dispatchEvent(createQuizAnswerEvent(detail)),
+      })
     );
   }
 

@@ -6,7 +6,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
  * Core quiz gameplay: question display, answer grid, selection,
  * immediate feedback, timer, progression, and score tracking.
  */
-function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
+function QuizEngine({ questions, community, timer: timerSeconds, difficulty, onComplete, onQuizStarted, onAnswered }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showFeedback, setShowFeedback] = useState(false);
@@ -47,6 +47,17 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
     setShuffledAnswers(all);
   }, [currentIndex, currentQuestion]);
 
+  // Fire quiz started callback on first render (when questions are loaded)
+  useEffect(() => {
+    if (currentIndex === 0 && questions.length > 0) {
+      onQuizStarted?.({
+        communitySlug: community?.slug,
+        questionCount: questions.length,
+        difficulty: difficulty || 'mixed',
+      });
+    }
+  }, []); // Run once on mount
+
   // Timer countdown
   useEffect(() => {
     if (!hasTimer || showFeedback) return;
@@ -80,7 +91,14 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
     setSelectedAnswer('__timed_out__');
     setShowFeedback(true);
     setAnswers(prev => [...prev, answer]);
-  }, [currentQuestion, showFeedback, showHint]);
+
+    onAnswered?.({
+      questionIndex: currentIndex,
+      correct: false,
+      selectedAnswer: null,
+      correctAnswer: currentQuestion.correctAnswer,
+    });
+  }, [currentQuestion, currentIndex, showFeedback, showHint, onAnswered]);
 
   // Handle answer selection
   const handleSelect = (answer) => {
@@ -100,6 +118,13 @@ function QuizEngine({ questions, community, timer: timerSeconds, onComplete }) {
     setSelectedAnswer(answer);
     setShowFeedback(true);
     setAnswers(prev => [...prev, answerRecord]);
+
+    onAnswered?.({
+      questionIndex: currentIndex,
+      correct: isCorrect,
+      selectedAnswer: answer,
+      correctAnswer: currentQuestion.correctAnswer,
+    });
   };
 
   // Advance to next question or finish
