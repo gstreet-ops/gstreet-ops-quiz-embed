@@ -63,7 +63,7 @@
 - [x] Generate final embed URL with Dark Glamour theme params
 - [x] Add `trivia.html` to `ellie-hallaron-website` with iframe + resize listener
 - [x] Add nav link to author site
-- [ ] Test desktop and mobile
+- [x] Test desktop and mobile
 
 ### 1.9 Documentation (0.5 hr)
 - [x] `docs/EMBED_PARAMS.md` — full parameter reference
@@ -138,7 +138,7 @@
 | Issue | Notes |
 |-------|-------|
 | Safari third-party cookies | Auth persistence may fail in Safari — needs testing in Phase 2 |
-| Fixed iframe height | Without postMessage listener on host, mobile may show internal scroll |
+| ~~Fixed iframe height~~ | ✅ Fixed — added scrolling=no, overflow hidden, +16px height buffer to host page. CLIENT_SETUP.md updated. |
 | ~~Result emoji for 0%~~ | ✅ Fixed — emoji now scales: 😅 0-29%, 💪 30-49%, 👍 50-79%, 🎉 80-100% |
 
 ---

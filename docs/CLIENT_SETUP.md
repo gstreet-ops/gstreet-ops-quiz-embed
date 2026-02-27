@@ -18,13 +18,16 @@ Paste this into any HTML page where you want the quiz to appear:
   width="100%"
   height="600"
   frameborder="0"
+  scrolling="no"
   allowtransparency="true"
-  style="border: none; border-radius: 12px; min-height: 600px;"
+  style="border: none; border-radius: 12px; min-height: 600px; overflow: hidden;"
   title="Trivia Quiz">
 </iframe>
 ```
 
 Replace `YOUR_SLUG` with your community slug.
+
+> **Important:** The `scrolling="no"` attribute and `overflow: hidden` style prevent an unwanted scrollbar inside the iframe on mobile devices. Always include both.
 
 ## Step 3: Add Auto-Resize (Recommended)
 
@@ -36,11 +39,13 @@ to your page so the iframe adjusts automatically:
   window.addEventListener('message', (e) => {
     if (e.data && e.data.type === 'quiz-embed-resize') {
       const iframe = document.getElementById('quiz-iframe');
-      if (iframe) iframe.style.height = e.data.height + 'px';
+      if (iframe) iframe.style.height = (e.data.height + 16) + 'px';
     }
   });
 </script>
 ```
+
+The `+ 16` adds a small buffer to prevent edge-case scrollbar flicker on some devices.
 
 ## Step 4: Customize (Optional)
 
