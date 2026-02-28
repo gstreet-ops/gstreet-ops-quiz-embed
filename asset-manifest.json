@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/gstreet-ops-quiz-embed/static/js/main.5c0b95b3.js",
+    "main.js": "/gstreet-ops-quiz-embed/static/js/main.f3c74de0.js",
     "index.html": "/gstreet-ops-quiz-embed/index.html",
-    "main.5c0b95b3.js.map": "/gstreet-ops-quiz-embed/static/js/main.5c0b95b3.js.map"
+    "main.f3c74de0.js.map": "/gstreet-ops-quiz-embed/static/js/main.f3c74de0.js.map"
   },
   "entrypoints": [
-    "static/js/main.5c0b95b3.js"
+    "static/js/main.f3c74de0.js"
   ]
 }
