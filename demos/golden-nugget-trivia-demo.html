@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Las Vegas Trivia — Golden Nugget</title>
+  <meta name="description" content="Think you know Las Vegas? Test your knowledge of the Golden Nugget and Fremont Street. Play the trivia quiz and see where you rank.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://gstreet-ops.github.io/gstreet-ops-quiz-embed/quiz-embed.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0A0A0A;
+      color: #F5F0EB;
+      font-family: 'Lato', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+      background: rgba(10,10,10,0.95);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: #C9A84C;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #F5F0EB;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: #C9A84C; }
+    .nav-cta {
+      background: #C9A84C;
+      color: #0A0A0A;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.25rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #E2C068; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 60%, rgba(201,168,76,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 20% 80%, rgba(26,107,58,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 1.25rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+      color: #F5F0EB;
+    }
+    .hero-title span { color: #C9A84C; }
+    .hero-subtitle {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: rgba(245,240,235,0.65);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+    .gold-rule {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C9A84C, transparent);
+      margin: 0 auto 3rem;
+    }
+
+    /* ── QUIZ EMBED ── */
+    .quiz-wrap {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    quiz-embed {
+      display: block;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      min-height: 580px;
+      border: 1px solid rgba(201,168,76,0.15);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border-top: 1px solid rgba(201,168,76,0.1);
+      font-size: 0.8rem;
+      color: rgba(245,240,235,0.35);
+      letter-spacing: 0.05em;
+    }
+    .footer a { color: #C9A84C; text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .nav-links, .nav-cta { display: none; }
+      .hero { padding-top: 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="#" class="nav-logo">Golden Nugget</a>
+    <ul class="nav-links">
+      <li><a href="#">Hotel</a></li>
+      <li><a href="#">Casino</a></li>
+      <li><a href="#">Dining</a></li>
+      <li><a href="#">The Tank</a></li>
+      <li><a href="#" class="active">Trivia</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Join 24K Select</a>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-eyebrow">Golden Nugget Las Vegas</p>
+    <h1 class="hero-title">Think You Know<br><span>Las Vegas?</span></h1>
+    <p class="hero-subtitle">
+      From Fremont Street legends to the secrets behind The Tank —
+      put your Vegas knowledge to the test.
+    </p>
+    <div class="gold-rule"></div>
+
+    <div class="quiz-wrap">
+      <quiz-embed
+        community="golden-nugget-las-vegas-trivia"
+        bg="#0A0A0A"
+        surface="#1C1400"
+        primary="#C9A84C"
+        accent="#1A6B3A"
+        text="#F5F0EB"
+        font="Lato"
+        count="10"
+        difficulty="mixed"
+        leaderboard="both"
+      ></quiz-embed>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2026 Golden Nugget Las Vegas. All rights reserved. &nbsp;|&nbsp; <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Responsible Gaming</a></p>
+  </footer>
+
+</body>
+</html>
